@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Signup</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('https://t4.ftcdn.net/jpg/06/51/44/67/360_F_651446718_ZIHGEFxdN1ZSP2hVmtembHIpShrOUo3e.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        .signup-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .signup-input, .drop {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .signup-button {
+            width: 100%;
+            padding: 14px;
+            background-color: rgb(11, 12, 12);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .signup-button:hover {
+            background-color: rgb(7, 8, 8);
+        }
+
+        .navbar {
+            background-color: #1c1c1c;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar div {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: auto;
+        }
+
+        .navbar a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: orange;
+        }
+
+        select.drop {
+            height: 44px;
+        }
+
+        @media (max-width: 600px) {
+            .signup-box {
+                margin: 30px 15px;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+   <div class="navbar">
+    <div></div>
+    <a href="{% url 'adminhome' %}">Home</a>
+    <a href="{% url 'add_course' %}">Add Course</a>
+    <a href="{% url 'stdsignup' %}">Add Student</a>
+    <a href="{% url 'show' %}">Student Details</a>
+    <a href="{% url 'manage_teachers' %}">Teachers Details</a>
+  </div>
+
+    <div class="signup-box">
+        <h2>Signup</h2>
+        <form action="{% url 'add_std' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" class="signup-input" name="name" placeholder="Name" required>
+            <input type="text" class="signup-input" name="address" placeholder="Address" required>
+            <input type="number" class="signup-input" name="age" placeholder="Age" required>
+            <input type="date" class="signup-input" name="date" placeholder="Date" required>
+
+            <select class="drop" name="course" style="border-color: transparent;">
+                {% for c in course %}
+                    <option value="{{c.id}}">{{c.coursename}}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <button type="submit" class="signup-button">ADD</button>
+        </form>
+    </div>
+
+</body>
+</html>

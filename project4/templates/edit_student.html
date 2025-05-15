@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Student</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://c4.wallpaperflare.com/wallpaper/952/536/1006/winter-4k-pc-desktop-wallpaper-preview.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 35px 30px;
+      max-width: 500px;
+      width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(5px);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+      font-size: 28px;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 600;
+      color: #34495e;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 15px;
+      background-color: #f9f9f9;
+      transition: 0.3s border ease;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #3498db;
+      outline: none;
+      box-shadow: 0 0 6px rgba(52, 152, 219, 0.4);
+    }
+
+    button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right,rgb(5, 142, 39), #5dade2);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right,rgb(14, 203, 8),rgb(10, 119, 17));
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 600px) {
+      form {
+        padding: 25px 20px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <form method="post">
+    <h2>Edit Student</h2>
+    {% csrf_token %}
+
+    <label for="studentname">Student Name:</label>
+    <input type="text" id="studentname" name="studentname" value="{{ student.studentname }}" required>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" value="{{ student.address }}" required>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" value="{{ student.age }}" required>
+
+    <label for="joiningdate">Joining Date:</label>
+    <input type="date" id="joiningdate" name="joiningdate" value="{{ student.joiningdate|date:'Y-m-d' }}" required>
+
+    <label for="course">Course:</label>
+    <select id="course" name="course" required>
+      {% for course in courses %}
+        <option value="{{ course.id }}" {% if course.id == student.course.id %}selected{% endif %}>
+          {{ course.coursename }}
+        </option>
+      {% endfor %}
+    </select>
+
+    <button type="submit">Update</button>
+  </form>
+
+</body>
+</html>

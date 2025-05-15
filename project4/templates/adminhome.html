@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80'); /* HD background */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background-color: rgba(28, 28, 28, 0.9); /* Slightly transparent navbar */
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .title {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .navbar a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    .navbar a:hover {
+      color: orange;
+      transform: scale(1.05);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 40px;
+      background-color: rgba(255, 255, 255, 0.95); /* Light overlay background */
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .btn-danger {
+      padding: 10px 20px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-danger:hover {
+      background-color: #c0392b;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar .title {
+        margin-bottom: 10px;
+      }
+
+      .navbar a {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+
+      .container {
+        padding: 20px;
+        margin: 30px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="title"></div>
+    <div>
+      <a href="{% url 'adminhome' %}">Home</a>
+      <a href="{% url 'add_course' %}">Add Course</a>
+      <a href="{% url 'stdsignup' %}">Add Student</a>
+      <a href="{% url 'show' %}">Student Details</a>
+      <a href="{% url 'manage_teachers' %}">Teachers Details</a>
+    </div>
+  </div>
+
+  <main class="container">
+    <h2>Welcome.... {{ request.user.username }}!</h2>
+    <a href="{% url 'logout' %}" class="btn-danger">Logout</a>
+  </main>
+
+</body>
+</html>

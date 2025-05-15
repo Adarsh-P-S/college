@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Card</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        .container {
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #fff;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+        }
+
+        table {
+            width: 80%;
+            max-width: 700px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            padding: 15px 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        td:first-child {
+            font-weight: bold;
+            color: #555;
+            width: 35%;
+        }
+
+        td:last-child {
+            color: #333;
+        }
+
+        .actions {
+            text-align: center;
+            margin: 15px;
+        }
+
+        .actions a {
+            padding: 12px 24px;
+            background-color: #2980b9;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .actions a:hover {
+            background-color: #1f6391;
+        }
+
+        .actions a.delete {
+            background-color: #e74c3c;
+        }
+
+        .actions a.delete:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Teacher Profile</h1>
+
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td>{{ teacher.user.username }}</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>{{ teacher.user.email }}</td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>{{ teacher.address }}</td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td>{{ teacher.phone }}</td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td>{{ teacher.age }}</td>
+            </tr>
+            <tr>
+                <td>Course:</td>
+                <td>{{ teacher.course.coursename }}</td>
+            </tr>
+        </table>
+
+        <div class="actions">
+            <a href="{% url 'edit_teacher' teacher.id %}">Edit Profile</a>
+        </div>
+        <div class="actions">
+            <a href="{% url 'delete_teacher' teacher.id %}" class="delete" onclick="return confirm('Are you sure you want to delete your profile?');">Delete Profile</a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - College of Applied Science</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://c4.wallpaperflare.com/wallpaper/935/849/231/background-tree-book-wallpaper-preview.jpg') no-repeat center center fixed; /* Background image */
+      background-size: cover; /* Ensure the image covers the entire page */
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 34px;
+      color: #00d2ff;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .login-container {
+      background-color: rgba(255, 255, 255, 0.15); /* Slight transparency for readability */
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.3);
+      width: 360px;
+      text-align: center;
+      backdrop-filter: blur(6px);
+    }
+
+    .login-container h2 {
+      margin-bottom: 25px;
+      font-size: 26px;
+      color: #ffffff;
+    }
+
+    .login-input {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border: 1px solid #00d2ff;
+      border-radius: 7px;
+      background-color: rgba(255,255,255,0.1);
+      color: white;
+      font-size: 16px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .login-input:focus {
+      border-color: #6dd5fa;
+      background-color: rgba(255,255,255,0.15);
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, #00d2ff, #3a7bd5);
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: transform 0.2s ease;
+    }
+
+    .login-button:hover {
+      transform: scale(1.03);
+    }
+
+    .alert {
+      background-color: #e63946;
+      padding: 12px;
+      border-radius: 5px;
+      margin-top: 15px;
+      font-size: 14px;
+      color: white;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    p {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #dddddd;
+    }
+
+    a {
+      color: #00d2ff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>College of Applied Science</h1>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <form action="{% url 'log' %}" method="POST">
+      {% csrf_token %}
+      <input type="text" class="login-input" name="usname" placeholder="Username" required>
+      <input type="password" class="login-input" name="passd" placeholder="Password" required>
+      <button type="submit" class="login-button">Log In</button>
+    </form>
+
+    {% for msg in messages %}
+      <div class="alert">{{ msg }}</div>
+    {% endfor %}
+
+    <p>Don't have an account? <a href="{% url 'signuppage' %}">Sign Up</a></p>
+  </div>
+</body>
+</html>
